@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="h5"></div>
+    <script>
+        let h5 = document.getElementById('h5')
+        let show = { 'showani': [] }
+        let stopnum = 0
+        let reply3 = {
+            type: 'bubble',
+            body: {
+                type: 'box',
+                layout: 'vertical',
+                contents: [
+                    {
+                        type: 'image',
+                        url: `${stopnum}`,
+                        size: 'full',
+                        aspectMode: 'cover',
+                        aspectRatio: '2:3',
+                        gravity: 'top'
+                    },
+                    {
+                        type: 'box',
+                        layout: 'vertical',
+                        contents: [
+                            {
+                                type: 'box',
+                                layout: 'vertical',
+                                contents: [
+                                    {
+                                        type: 'text',
+                                        text: `${stopnum}`,
+                                        size: 'xl',
+                                        color: '#ffffff',
+                                        weight: 'bold'
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'box',
+                                layout: 'vertical',
+                                contents: [
+                                    {
+                                        type: 'text',
+                                        text: `${stopnum}`,
+                                        color: '#ebebeb',
+                                        size: 'sm',
+                                        flex: 0
+                                    },
+                                    {
+                                        type: 'text',
+                                        text: `${stopnum}`,
+                                        color: '#ffffffcc',
+                                        gravity: 'bottom',
+                                        flex: 0,
+                                        size: 'sm'
+                                    }
+                                ],
+                                spacing: 'lg'
+                            }
+                        ],
+                        position: 'absolute',
+                        offsetBottom: '0px',
+                        offsetStart: '0px',
+                        offsetEnd: '0px',
+                        backgroundColor: '#a1c9c1bb',
+                        paddingAll: '20px',
+                        paddingTop: '18px'
+                    },
+                    {
+                        type: 'box',
+                        layout: 'vertical',
+                        contents: [
+                            {
+                                type: 'text',
+                                text: `認養/${stopnum}`,
+                                color: '#ffffff',
+                                align: 'center',
+                                size: 'xs',
+                                offsetTop: '7px'
+                            }
+                        ],
+                        position: 'absolute',
+                        cornerRadius: '20px',
+                        offsetTop: '20px',
+                        backgroundColor: '#a1c9c1',
+                        offsetStart: '20px',
+                        height: '30px',
+                        width: '70px'
+                    }
+                ],
+                paddingAll: '0px'
+            }
+        }
+
+        for (let count = 0; count < 5; count++) {
+            show.showani.push(reply3)
+            stopnum++
+            console.log(stopnum)
+        }
+        reply2 = {
+            type: 'flex',
+            altText: 'Flex',
+            contents: {
+                type: 'carousel',
+                contents:
+                    show.showani
+
+            }
+        }
+        console.log(reply2)
+
+        h5.innerHTML = `${reply2}123`
+    </script>
+</body>
+
+</html>
