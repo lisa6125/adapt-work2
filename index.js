@@ -44,8 +44,8 @@ bot.on('message', async (event) => {
     let stopnum = 0
     if (text.includes('找找家')) {
       stopnum += 5
-      for (const inform in informations) {
-        if (text.includes(inform[count].animal_kind) && text.includes(inform[count].animal_sex) && text.includes(inform[count].animal_place.slice(0, 3)) && count < stopnum) {
+      for (const inform of informations) {
+        if (text.includes(inform.animal_kind) && text.includes(inform.animal_sex) && text.includes(inform.animal_place.slice(0, 3)) && count < stopnum) {
           count++
           const content = {
             type: 'bubble',
@@ -63,7 +63,7 @@ bot.on('message', async (event) => {
                       contents: [
                         {
                           type: 'text',
-                          text: inform[count].shelter_name,
+                          text: inform.shelter_name,
                           size: 'xl',
                           color: '#ffffff',
                           weight: 'bold'
@@ -76,14 +76,14 @@ bot.on('message', async (event) => {
                       contents: [
                         {
                           type: 'text',
-                          text: inform[count].shelter_address,
+                          text: inform.shelter_address,
                           color: '#ebebeb',
                           size: 'sm',
                           flex: 0
                         },
                         {
                           type: 'text',
-                          text: inform[count].shelter_tel,
+                          text: inform.shelter_tel,
                           color: '#ffffffcc',
                           gravity: 'bottom',
                           flex: 0,
@@ -126,11 +126,11 @@ bot.on('message', async (event) => {
               paddingAll: '0px'
             }
           }
-          if (inform[count].album_file.length > 0) {
+          if (inform.album_file.length > 0) {
             content.body.contents.unshift(
               {
                 type: 'image',
-                url: inform[count].album_file,
+                url: inform.album_file,
                 size: 'full',
                 aspectMode: 'cover',
                 aspectRatio: '2:3',
