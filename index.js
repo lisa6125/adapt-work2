@@ -140,7 +140,7 @@ bot.on('message', async (event) => {
             content.body.contents.unshift(
               {
                 type: 'image',
-                url: './img/cute.gif',
+                url: './img/梗圖.png',
                 size: 'full',
                 aspectMode: 'cover',
                 aspectRatio: '2:3',
