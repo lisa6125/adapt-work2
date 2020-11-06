@@ -149,7 +149,7 @@ bot.on('message', async (event) => {
           }
           reply2.contents.contents.push(content)
         }
-        if (count >= informations.length) {
+        if (count === 25) {
           count = 0
           stopnum = 0
           console.log('沒了')
