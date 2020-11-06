@@ -136,16 +136,6 @@ bot.on('message', async (event) => {
                 aspectRatio: '2:3',
                 gravity: 'top'
               })
-          } else {
-            content.body.contents.unshift(
-              {
-                type: 'image',
-                url: './img/梗圖.png',
-                size: 'full',
-                aspectMode: 'cover',
-                aspectRatio: '2:3',
-                gravity: 'top'
-              })
           }
           reply2.contents.contents.push(content)
         }
