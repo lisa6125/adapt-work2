@@ -6,7 +6,6 @@ import dotenv from 'dotenv'
 import axios from 'axios'
 
 import schedule from 'node-schedule'
-import fs from 'fs'
 
 // 讀取.env
 dotenv.config()
@@ -32,7 +31,7 @@ const bot = linebot({
 bot.on('message', async (event) => {
   try {
     const text = event.message.text
-    let reply2 = {
+    const reply2 = {
       type: 'flex',
       altText: 'Flex',
       contents: {
@@ -45,8 +44,8 @@ bot.on('message', async (event) => {
     let stopnum = 0
     if (text.includes('找找家')) {
       stopnum += 5
-      for (const inform of informations) {
-        if (text.includes(inform.animal_kind) && text.includes(inform.animal_sex) && text.includes(inform.animal_place.slice(0, 3)) && count < stopnum) {
+      for (const inform in informations) {
+        if (text.includes(inform[count].animal_kind) && text.includes(inform[count].animal_sex) && text.includes(inform[count].animal_place.slice(0, 3)) && count < stopnum) {
           count++
           const content = {
             type: 'bubble',
@@ -64,7 +63,7 @@ bot.on('message', async (event) => {
                       contents: [
                         {
                           type: 'text',
-                          text: inform.shelter_name,
+                          text: inform[count].shelter_name,
                           size: 'xl',
                           color: '#ffffff',
                           weight: 'bold'
@@ -77,14 +76,14 @@ bot.on('message', async (event) => {
                       contents: [
                         {
                           type: 'text',
-                          text: inform.shelter_address,
+                          text: inform[count].shelter_address,
                           color: '#ebebeb',
                           size: 'sm',
                           flex: 0
                         },
                         {
                           type: 'text',
-                          text: inform.shelter_tel,
+                          text: inform[count].shelter_tel,
                           color: '#ffffffcc',
                           gravity: 'bottom',
                           flex: 0,
@@ -127,11 +126,21 @@ bot.on('message', async (event) => {
               paddingAll: '0px'
             }
           }
-          if (inform.album_file.length > 0) {
+          if (inform[count].album_file.length > 0) {
             content.body.contents.unshift(
               {
                 type: 'image',
-                url: inform.album_file,
+                url: inform[count].album_file,
+                size: 'full',
+                aspectMode: 'cover',
+                aspectRatio: '2:3',
+                gravity: 'top'
+              })
+          } else {
+            content.body.contents.unshift(
+              {
+                type: 'image',
+                url: './img/cute.gif',
                 size: 'full',
                 aspectMode: 'cover',
                 aspectRatio: '2:3',
@@ -140,15 +149,12 @@ bot.on('message', async (event) => {
           }
           reply2.contents.contents.push(content)
         }
+        if (count > informations.length) {
+          count = 0
+          stopnum = 0
+          console.log('沒了')
+        }
       }
-      if (count > informations.length) {
-        count = 0
-        stopnum = 0
-        console.log('沒了')
-      }
-    }
-    if (text === '123') {
-      reply2 = '找不到'
     }
     event.reply(reply2)
     // fs.writeFile('./flex.json', JSON.stringify(reply2), () => {
