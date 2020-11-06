@@ -46,7 +46,7 @@ bot.on('message', async (event) => {
     if (text.includes('找找家')) {
       stopnum += 5
       for (const inform of informations) {
-        if (text.includes(inform.animal_kind) && text.includes(inform.animal_sex) && text.includes(inform.animal_place.slice(0, 3)) && count < stopnum) {
+        if (text.includes(inform.animal_kind) && text.includes(inform.animal_sex) && text.includes(inform.animal_place.slice(0, 2)) && count < stopnum) {
           count++
           const content = {
             type: 'bubble',
